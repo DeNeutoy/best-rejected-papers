@@ -1,6 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
-<script src="https://distill.pub/template.v1.js"></script>
+<script src="https://distill.pub/template.v2.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="data/top_10_per_conf.js"></script>
 <script src="visualization.js" defer></script>
@@ -9,22 +9,33 @@
 <link rel="stylesheet" href="visualization.css">
 <link rel="stylesheet" href="best-rejected-papers.css">
 
-<script type="text/front-matter">
-  title: "The Best Rejected Papers"
-  description: "OpenReview's radical transparency allows us to look at the quality of peer review over time."
-  authors:
-  - Mark Neumann
-  affiliations:
-  - markneumann.xyz: https://markneumann.xyz
-</script>
+<d-front-matter>
+  <script type="text/json">{
+    "title": "The Best Rejected Papers",
+    "description": "OpenReview's radical transparency allows us to look at the quality of peer review over time.",
+    "authors": [
+      {
+        "author": "Mark Neumann",
+        "authorURL": "https://markneumann.xyz",
+        "affiliation":"markneumann.xyz",
+        "affiliationURL":"https://markneumann.xyz"
+      }
+    ],
+    "katex": {
+      "delimiters" : [
+        {"left": "$", "right": "$", "display": false}
+      ]
+    }
+  }</script>
+</d-front-matter>
 
-<dt-article>
+<d-title>
   <h1>The Best Rejected Papers</h1>
-  <h2>OpenReview's radical transparency allows us to look at the quality of peer review over time.</h2>
-  <dt-byline></dt-byline>
+</d-title>
+<d-byline></d-byline>
 
 
-
+<d-article>
 
   <h2>What is OpenReview?</h2>
   <p>
@@ -34,7 +45,7 @@
     It provides an <a href="https://github.com/openreview" target="_blank">open source platform</a> 
     for conferences to manage their review process. OpenReview has been used by many large Machine Learning conferences
     to manage workshops, full conference submissions and even longer running editorial review processes. 
-    OpenReview.net <dt-cite key="Soergel2013OpenSA"></dt-cite> was created by Andrew McCallum's Information 
+    OpenReview.net <d-cite key="Soergel2013OpenSA"></d-cite> was created by Andrew McCallum's Information 
     Extraction and Synthesis Laboratory at UMass Amherst. 
   </p>
 
@@ -114,18 +125,18 @@
   </p>
   <p>These papers demonstrate that peer review, while valuable, is not infallible - some groundbreaking work may initially be overlooked by reviewers.</p>
  
-  <dt-code block language="javascript">
+  <d-code block language="javascript">
     var x = 25;
     function(x){
       return x * x;
     }
-  </dt-code>
-  <p>This is a footnote <dt-fn>This will become a hoverable footnote.</dt-fn></p>
+  </d-code>
+  <p>This is a footnote <d-footnote>This will become a hoverable footnote.</d-footnote></p>
 
-</dt-article>
+</d-article>
 
-<dt-appendix>
-</dt-appendix>
+<d-appendix>
+</d-appendix>
 
 <script type="text/bibliography">
   @article{gregor2015draw,
