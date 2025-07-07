@@ -14,3 +14,7 @@ dt-article h2 {
     height: 400px !important;
   }
 } 
+
+dt-banner {
+  display: none;
+}
