@@ -1,0 +1,146 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="https://distill.pub/template.v1.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="data/top_10_per_conf.js"></script>
+<script src="visualization.js" defer></script>
+<script src="best-rejected-papers.js" defer></script>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="visualization.css">
+<link rel="stylesheet" href="best-rejected-papers.css">
+
+<script type="text/front-matter">
+  title: "The Best Rejected Papers"
+  description: "OpenReview's radical transparency allows us to look at the quality of peer review over time."
+  authors:
+  - Mark Neumann
+  affiliations:
+  - markneumann.xyz: https://markneumann.xyz
+</script>
+
+<dt-article>
+  <h1>The Best Rejected Papers</h1>
+  <h2>OpenReview's radical transparency allows us to look at the quality of peer review over time.</h2>
+  <dt-byline></dt-byline>
+
+
+
+
+  <h2>What is OpenReview?</h2>
+  <p>
+    <a href="https://openreview.net/" target="_blank">OpenReview</a> is a platform designed to
+    encourage openness and public access in scientific communication, with a particular emphasis
+    on the peer review process.
+    It provides an <a href="https://github.com/openreview" target="_blank">open source platform</a> 
+    for conferences to manage their review process. OpenReview has been used by many large Machine Learning conferences
+    to manage workshops, full conference submissions and even longer running editorial review processes. 
+    OpenReview.net <dt-cite key="Soergel2013OpenSA"></dt-cite> was created by Andrew McCallum's Information 
+    Extraction and Synthesis Laboratory at UMass Amherst. 
+  </p>
+
+  <p>
+   One particularly interesting feature of conference submissions using OpenReview is the
+   publication of paper acceptance decisions, official reviews and fully anonymized 
+   discussions surrounding paper submissions. 
+  </p>
+
+  <p>
+    As these acceptance decisions are public, we can look at the quality of peer review over time (and other interesting patterns)
+    by linking OpenReview submissions to external academic graphs (in this case, <a href="https://semanticscholar.org/" target="_blank">Semantic Scholar</a>).
+  </p>
+
+
+  <h2>The Data</h2>
+  
+  <p>
+    Many conferences use OpenReview to manage parts of their conference process (in particular, for workshop reviewing).
+    Two conferences have used OpenReview consistently to manage their main conference tracks - 
+    <a href="https://openreview.net/group?id=ICLR.cc/2013/Conference" target="_blank">The International Conference on Learning Representations (ICLR)</a> and 
+    <a href="https://openreview.net/group?id=NeurIPS.cc/2017/Conference" target="_blank">Neural Information Processing Systems (NeurIPS)</a>.
+
+  In particular, we will focus on the following conference years:
+  <ul>
+    <li> ICLR: 2017, 2019-2025
+    <li> Neurips: 2021-2025
+  </ul>
+
+  <p>
+    Neurips only transitioned to OpenReview in 2021, and for 2018, OpenReview was used for ICLR reviewing but the decisions and reviews were not published.
+  </p>
+
+
+  </p>
+
+
+  <h3>Notes on the data</h3>
+
+
+
+  <h2>The Best Rejected Papers</h2>
+
+  <h2>Negative sentiment, highly cited papers</h2>
+
+  <h2>Where do rejected papers end up?</h2>
+
+  <ul>
+    <li> Look at rejected papers later accepted to "high quality" conferences (or even just arxiv)
+    <li> Sankey diagram for papers with over 17 citations? 
+  </ul> 
+
+
+
+
+  <h2>Dynamic Visualization</h2>
+  <p>Below is an interactive visualization showing the relationship between ICLR paper acceptance status and subsequent citation counts:</p>
+  
+  <div id="visualization" style="margin-top: 20px; margin-bottom: 20px;"></div>
+  
+  <p>The visualization above allows us to explore patterns in how accepted and rejected papers accumulate citations over time.</p>
+
+  <h2>Best Rejected Papers</h2>
+  <p>Below are the most highly cited papers that were initially rejected from these conferences, organized by venue:</p>
+  
+  <p>
+  <div id="best-rejected-visualization" style="margin-top: 20px; margin-bottom: 20px;">
+    <div class="conference-tabs">
+      <!-- Tab buttons will be dynamically generated based on available data -->
+    </div>
+    
+    <div class="papers-container">
+      <div id="papers-loading" class="loading-message">Loading papers...</div>
+      <div id="papers-content" class="papers-content"></div>
+    </div>
+  </div>
+  </p>
+  <p>These papers demonstrate that peer review, while valuable, is not infallible - some groundbreaking work may initially be overlooked by reviewers.</p>
+ 
+  <dt-code block language="javascript">
+    var x = 25;
+    function(x){
+      return x * x;
+    }
+  </dt-code>
+  <p>This is a footnote <dt-fn>This will become a hoverable footnote.</dt-fn></p>
+
+</dt-article>
+
+<dt-appendix>
+</dt-appendix>
+
+<script type="text/bibliography">
+  @article{gregor2015draw,
+    title={DRAW: A recurrent neural network for image generation},
+    author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+    journal={arXivreprint arXiv:1502.04623},
+    year={2015},
+    url={https://arxiv.org/pdf/1502.04623.pdf}
+  }
+
+  @inproceedings{Soergel2013OpenSA,
+    title={Open Scholarship and Peer Review: a Time for Experimentation},
+    author={David Soergel and Adam Saunders and Andrew McCallum},
+    year={2013},
+    url={https://api.semanticscholar.org/CorpusID:14548845}
+  }
+
+</script>

@@ -1,0 +1,16 @@
+/* Additional Distill article styling */
+dt-article p {
+  line-height: 1.6;
+}
+
+dt-article h2 {
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #visualization {
+    height: 400px !important;
+  }
+} 
