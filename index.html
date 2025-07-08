@@ -5,16 +5,19 @@
 <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
 <script src="data/top_10_per_conf.js"></script>
 <script src="data/bubble-sample-data.js"></script>
+<script src="data/high_impact_first_authors_rejected.js"></script>
 <script src="best-rejected-papers.js" defer></script>
 <script src="bubble-visualization.js" defer></script>
+<script src="high-impact-first-authors.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="best-rejected-papers.css">
 <link rel="stylesheet" href="bubble-visualization.css">
+<link rel="stylesheet" href="high-impact-first-authors.css">
 
 <!-- Fragments -->
 <script src="fragments/paper_matching_success_rate.js"></script>
 <script src="fragments/failed_papers_by_conference.js"></script>
-
+<script src="fragments/citation_count_vs_review_score.js"></script>
 <d-front-matter>
   <script id='distill-front-matter' type="text/json">{
     "title": " The Best Rejected Papers",
@@ -92,10 +95,52 @@
 
   <h2>Paper Matching Success Rate</h2>
 
+  <p>
+    To link OpenReview papers to their Semantic Scholar papers, we used the <a href="https://api.semanticscholar.org/api-docs/graph" target="_blank">Semantic Scholar Graph API</a>.
+    As a first step, I just used exact title matching to link papers, which is reasonably effective. 
+    The largest source of errors when using this approach came from papers with LaTeX in the title, 
+    as well as as papers which changed their title from a pre-print version which was already publicly available.
+  </p>
+
+  <p>
+    The following chart shows the success rate of this approach over time.
+  </p>
+
     <div id="4b284f59-68f8-4606-9df1-192afcf39a27" class="l-body-outset" style="height:500px; width:800px;"></div>
 
 
+    <p>
+      To catch some of these errors, I then used a second pass to approximately link papers. This used Semantic Scholar's Paper Search API to retrieve
+      the top 10 search results for a given paper title. I then checked for the highest scoring result based on the following criteria:
+
+      <ul>
+        <li>
+          Levenshtein distance between titles
+        </li>
+        <li>
+          Average Levenshtein distance between authors, ordered
+        </li>
+        <li>
+          Discarding results where the highest ranking result based on the above criteria had a title similarity of less than 0.7
+        </li>
+      </ul>
+
+      This catches quite a few of the errors (particularly related to syntactical differences in the title). For some papers submitted
+      to OpenReview, there actually is no publicly available paper, typically because these papers are either improved for another subsequent
+      conference, or are not high enough quality to be published.
+    </p>
+
+    <p>
+      To check this, we can look at the acceptance rate of papers which were not matched to a publicly available paper. As the graph below shows,
+      most papers across all conferences which were not linkable were either rejected or withdrawn.
+    </p>
+
     <div id="92dddb17-1483-4db3-afc8-0e627a1d8080" class="l-body-outset" style="height: 500px; width: 800px" ></div>
+
+
+
+    <div id="98482921-8bd7-431e-bab8-521dcde1ff79" class="l-screen-inset" style="height: 1600px; width: 1200px; margin: 0 auto" ></div>
+
 
   <h2>🏆 Best Rejected Papers 🏆</h2>
   <p>Below are the most highly cited papers that were initially rejected from these conferences, organized by venue:</p>
@@ -114,6 +159,17 @@
   </p>
 
 
+
+
+  <h2> High Impact, "Unlucky" First Authors </h2>
+
+  <p>
+    The following shows the most productive first authors whose papers were initially rejected from these conferences. 
+    Each author is ranked by their average citations per year, with expandable details showing their rejected papers and citation counts.
+  </p>
+
+  <div id="high-impact-first-author-rejected-visualization" style="margin-top: 20px; margin-bottom: 20px;">
+  </div>
 
   <p>This is a footnote <d-footnote>This will become a hoverable footnote.</d-footnote></p>
 
