@@ -2,16 +2,22 @@
 <meta charset="utf-8">
 <script src="https://distill.pub/template.v2.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
 <script src="data/top_10_per_conf.js"></script>
-<script src="visualization.js" defer></script>
+<script src="data/bubble-sample-data.js"></script>
 <script src="best-rejected-papers.js" defer></script>
+<script src="bubble-visualization.js" defer></script>
 <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="visualization.css">
 <link rel="stylesheet" href="best-rejected-papers.css">
+<link rel="stylesheet" href="bubble-visualization.css">
+
+<!-- Fragments -->
+<script src="fragments/paper_matching_success_rate.js"></script>
+<script src="fragments/failed_papers_by_conference.js"></script>
 
 <d-front-matter>
   <script id='distill-front-matter' type="text/json">{
-    "title": "The Best Rejected Papers",
+    "title": " The Best Rejected Papers",
     "description": "OpenReview's radical transparency allows us to look at the quality of peer review over time.",
     "published": "Feb 19, 2025",
     "doi": "TBC",
@@ -84,33 +90,14 @@
 
   </p>
 
+  <h2>Paper Matching Success Rate</h2>
 
-  <h3>Notes on the data</h3>
-
-
-
-  <h2>The Best Rejected Papers</h2>
-
-  <h2>Negative sentiment, highly cited papers</h2>
-
-  <h2>Where do rejected papers end up?</h2>
-
-  <ul>
-    <li> Look at rejected papers later accepted to "high quality" conferences (or even just arxiv)
-    <li> Sankey diagram for papers with over 17 citations? 
-  </ul> 
+    <div id="4b284f59-68f8-4606-9df1-192afcf39a27" class="l-body-outset" style="height:500px; width:800px;"></div>
 
 
+    <div id="92dddb17-1483-4db3-afc8-0e627a1d8080" class="l-body-outset" style="height: 500px; width: 800px" ></div>
 
-
-  <h2>Dynamic Visualization</h2>
-  <p>Below is an interactive visualization showing the relationship between ICLR paper acceptance status and subsequent citation counts:</p>
-  
-  <div id="visualization" style="margin-top: 20px; margin-bottom: 20px;"></div>
-  
-  <p>The visualization above allows us to explore patterns in how accepted and rejected papers accumulate citations over time.</p>
-
-  <h2>Best Rejected Papers</h2>
+  <h2>🏆 Best Rejected Papers 🏆</h2>
   <p>Below are the most highly cited papers that were initially rejected from these conferences, organized by venue:</p>
   
   <p>
@@ -125,14 +112,9 @@
     </div>
   </div>
   </p>
-  <p>These papers demonstrate that peer review, while valuable, is not infallible - some groundbreaking work may initially be overlooked by reviewers.</p>
- 
-  <d-code block language="javascript">
-    var x = 25;
-    function(x){
-      return x * x;
-    }
-  </d-code>
+
+
+
   <p>This is a footnote <d-footnote>This will become a hoverable footnote.</d-footnote></p>
 
 </d-article>
