@@ -4,14 +4,11 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
 <script src="data/top_10_per_conf.js"></script>
-<script src="data/bubble-sample-data.js"></script>
 <script src="data/high_impact_first_authors_rejected.js"></script>
 <script src="best-rejected-papers.js" defer></script>
-<script src="bubble-visualization.js" defer></script>
 <script src="high-impact-first-authors.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="best-rejected-papers.css">
-<link rel="stylesheet" href="bubble-visualization.css">
 <link rel="stylesheet" href="high-impact-first-authors.css">
 
 <!-- Fragments -->
@@ -125,9 +122,11 @@
         </li>
       </ul>
 
+      <p>
       This catches quite a few of the errors (particularly related to syntactical differences in the title). For some papers submitted
       to OpenReview, there actually is no publicly available paper, typically because these papers are either improved for another subsequent
       conference, or are not high enough quality to be published.
+</p>
     </p>
 
     <p>
@@ -137,7 +136,48 @@
 
     <div id="92dddb17-1483-4db3-afc8-0e627a1d8080" class="l-body-outset" style="height: 500px; width: 800px" ></div>
 
+      <p>
+        The reward for doing this work is a set of 38,262 linked records between OpenReview submissions and a dynamic academic graph, as well as 462,995 structured comments from reviewers.
+        <a href="https://api.semanticscholar.org/api-docs/graph#tag/Paper-Data/operation/get_graph_get_paper" target="_blank">Semantic Scholar's paper information</a> 
+        is quite rich, and includes information about authors, citations, and a variety of other metadata. By default, I added
+        citation counts, venue information, Specter embeddings <d-cite key="Singh2022SciRepEvalAM"></d-cite> and author ids to the dataset - but other information is easily retrievable using the <d-code language="python">semantic_scholar_id</d-code>.
 
+
+        This gives us the ability to look at the quality of peer review over time (and also means this dataset can be updated in the future, as papers
+        gather more citations).
+      </p>
+    <div class="l-body-outset">
+    <d-code block language="python">
+      id                                                               BkbY4psgg
+      semantic_scholar_id               6b024162f81e8ff7aa34c3a43d601a912d012c78
+      raw_decision                                                ICLR 2017 Oral
+      normalized_decision                                                   Oral
+      title                    Making Neural Programming Architectures Genera...
+      abstract                 Empirically, neural networks that attempt to l...
+      keywords                                                   [Deep learning]
+      accepted                                                              True
+      publication_venue        International Conference on Learning Represent...
+      publication_venue_id                  939c6e1d-0d17-4d6e-8a82-66d960df0e40
+      url                      https://www.semanticscholar.org/paper/6b024162...
+      citation_count                                                         146
+      embedding                [-0.0735881552, 0.3261716962, -0.3699628115, -...
+      authors                              [Jonathon Cai, Richard Shin, D. Song]
+      authorIds                                   [2350111, 39428234, 143711382]
+      conference_year                                                       2017
+      conference_name                                                       iclr
+      conf_id                                                           iclr2017
+      review_scores                                              [8.0, 9.0, 8.0]
+      review_score_avg                                                  8.333333
+      review_confidences                                         [8.0, 9.0, 8.0]
+      review_confidence_avg                                                  4.0
+    </d-code>
+    <div style="text-align: center;">
+      <i style="font-size: 12px;">
+        An example record from the dataset.
+      </i>
+    </div>
+    </div>
+    </p>
 
     <div id="98482921-8bd7-431e-bab8-521dcde1ff79" class="l-screen-inset" style="height: 1600px; width: 1200px; margin: 0 auto" ></div>
 
@@ -190,6 +230,13 @@
         author={David Soergel and Adam Saunders and Andrew McCallum},
         year={2013},
         url={https://api.semanticscholar.org/CorpusID:14548845}
+      }
+      @inproceedings{Singh2022SciRepEvalAM,
+        title={SciRepEval: A Multi-Format Benchmark for Scientific Document Representations},
+        author={Amanpreet Singh and Mike D'Arcy and Arman Cohan and Doug Downey and Sergey Feldman},
+        booktitle={Conference on Empirical Methods in Natural Language Processing},
+        year={2022},
+        url={https://api.semanticscholar.org/CorpusID:254018137}
       }
     </script>
   </d-bibliography>
