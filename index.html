@@ -1,5 +1,7 @@
 <!doctype html>
 <meta charset="utf-8">
+<head>
+  <title>The Best Rejected Papers</title>
 <script src="https://distill.pub/template.v2.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
@@ -54,6 +56,7 @@
   }</script>
 </d-front-matter>
 
+</head>
 <d-title>
   <h1>The Best Rejected Papers</h1>
 </d-title>
@@ -197,13 +200,14 @@
     </div>
     </div>
 
+    <p>
     In addition to the paper information, we also have a set of 462,995 structured comments from reviewers. these
     comments include references to papers, anonymous author signatures, and arbitrary content (typically in the
     form of title:content blocks which render in OpenReview). Reviews are distingushed from other comments by the
     'is_review' field, which is set to True for reviews. These comments will also have a numeric rating and confidence score.
     Finally, all comments have a reply_to_id field, which links to the id of the paper that the comment is replying to. Review comments
     will have a reply_to_id that links to the id of the paper they are reviewing.  <d-footnote>There are a small number of orphaned comments which do not have a reply_to_id. From inspection, these tend to be special cases where an AC has manually commented on a paper conversation.</d-footnote>
-
+    </p>
 
     <div class="l-body-outset">
       <d-code block language="javascript">
