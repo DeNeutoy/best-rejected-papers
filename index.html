@@ -85,6 +85,8 @@
 
   <p>
     Neurips only transitioned to OpenReview in 2021, and for 2018, OpenReview was used for ICLR reviewing but the decisions and reviews were not published.
+    There is also one important difference between the two conferences - all papers submitted to ICLR are public by default, but papers rejected from Neurips are  
+    only made public with the author's permission. This introduces a clear bias in the data (which can be seen in the number of rejected papers below).
   </p>
 
 
@@ -177,6 +179,47 @@
       </i>
     </div>
     </div>
+
+    In addition to the paper information, we also have a set of 462,995 structured comments from reviewers. these
+    comments include references to papers, anonymous author signatures, and arbitrary content (typically in the
+    form of title:content blocks which render in OpenReview). Reviews are distingushed from other comments by the
+    'is_review' field, which is set to True for reviews. These comments will also have a numeric rating and confidence score.
+    Finally, all comments have a reply_to_id field, which links to the id of the paper that the comment is replying to. Review comments
+    will have a reply_to_id that links to the id of the paper they are reviewing.  
+    <d-footnote>There are a small number of orphaned comments which do not have a reply_to_id. From inspection, these tend to be special cases where an AC has manually commented on a paper conversation.</d-footnote>
+
+
+    <div class="l-body-outset">
+      <d-code block language="javascript">
+        {'conference_id': 'iclr2017',
+        'paper_id': 'B1jnyXXJx',
+        'comment_id': 'BJPZL-vmx',
+        'signature': 'ICLR.cc/2017/conference/paper4/AnonReviewer1',
+        'content': {
+          'title': 'hyperparameter optimization and momentum vs CPN',
+          'question': "The hyperparameters of gradient descent seem to be chosen once and fixed. 
+                       Would optimizing the gradient descent hyperparameters lead to equivalent 
+                       performance as the CPN method?\n\nFollowing up on another reviewer's 
+                       question: CPN seems closely related to momentum. Can you provide a clear 
+                       example to show how CPN is qualitatively distinct from momentum? (I believe
+                       it is, but this could be clarified further in the paper)"
+          },
+        'reply_to_id': 'B1jnyXXJx',
+        'is_review': False,
+        'rating': None,
+        'numeric_rating': None,
+        'confidence': None,
+        'numeric_confidence': None}
+      </d-code>
+      <div style="text-align: center;">
+        <i style="font-size: 12px;">
+          An example record from the dataset.
+        </i>
+      </div>
+      </div>
+
+
+
     </p>
 
     <div id="98482921-8bd7-431e-bab8-521dcde1ff79" class="l-screen-inset" style="height: 1600px; width: 1200px; margin: 0 auto" ></div>
