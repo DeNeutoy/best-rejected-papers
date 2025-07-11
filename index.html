@@ -11,6 +11,23 @@
 <link rel="stylesheet" href="best-rejected-papers.css">
 <link rel="stylesheet" href="high-impact-first-authors.css">
 
+<!-- OpenGraph Meta Tags -->
+<meta property="og:title" content="The Best Rejected Papers">
+<meta property="og:description" content="OpenReview's radical transparency allows us to look at the quality of peer review over time. Discover the most highly cited papers that were initially rejected from top ML conferences.">
+<meta property="og:image" content="./og-image.jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Data visualization showing citation counts vs review scores for rejected papers">
+<meta property="og:url" content="https://deneutoy.github.io/best-rejected-papers/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Best Rejected Papers">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Best Rejected Papers">
+<meta name="twitter:description" content="OpenReview's radical transparency allows us to look at the quality of peer review over time. Discover the most highly cited papers that were initially rejected from top ML conferences.">
+<meta name="twitter:image" content="./images/og-image.png">
+
 <!-- Fragments -->
 <script src="fragments/paper_matching_success_rate.js"></script>
 <script src="fragments/failed_papers_by_conference.js"></script>
@@ -185,8 +202,7 @@
     form of title:content blocks which render in OpenReview). Reviews are distingushed from other comments by the
     'is_review' field, which is set to True for reviews. These comments will also have a numeric rating and confidence score.
     Finally, all comments have a reply_to_id field, which links to the id of the paper that the comment is replying to. Review comments
-    will have a reply_to_id that links to the id of the paper they are reviewing.  
-    <d-footnote>There are a small number of orphaned comments which do not have a reply_to_id. From inspection, these tend to be special cases where an AC has manually commented on a paper conversation.</d-footnote>
+    will have a reply_to_id that links to the id of the paper they are reviewing.  <d-footnote>There are a small number of orphaned comments which do not have a reply_to_id. From inspection, these tend to be special cases where an AC has manually commented on a paper conversation.</d-footnote>
 
 
     <div class="l-body-outset">
