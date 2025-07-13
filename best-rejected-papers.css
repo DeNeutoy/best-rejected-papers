@@ -234,4 +234,8 @@
     align-items: flex-start;
     gap: 8px;
   }
+
+  .paper-separator {
+    display: none;
+  }
 } 

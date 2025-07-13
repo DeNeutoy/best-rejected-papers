@@ -237,7 +237,6 @@
 
 @media (max-width: 480px) {
     .author-stats-inline {
-        flex-direction: column;
         align-items: flex-start;
         gap: 4px;
     }
@@ -256,5 +255,9 @@
     
     .paper-meta {
         gap: 4px;
+    }
+
+    .paper-separator {
+        display: none;
     }
 } 
