@@ -1,5 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
   <title>The Best Rejected Papers</title>
 <script src="https://distill.pub/template.v2.js"></script>
@@ -39,7 +40,7 @@
     "title": " The Best Rejected Papers",
     "description": "OpenReview's radical transparency allows us to look at the quality of peer review over time.",
     "published": "Feb 19, 2025",
-    "doi": "https://doi.org/10.5281/zenodo.15866613",
+    "doi": "10.5281/zenodo.15866613",
     "authors": [
       {
         "author": "Mark Neumann",
@@ -63,8 +64,7 @@
 <d-byline></d-byline>
 
 
-<d-article>
-
+<d-article style="overflow-x: scroll;">
   <p>
     Peer review is the cornerstone of scientific publishing, yet its effectiveness remains a subject of ongoing debate,
     particularly as conference submission numbers continue to grow.
@@ -138,7 +138,9 @@
     The following chart shows the success rate of this approach over time.
   </p>
 
-    <div id="4b284f59-68f8-4606-9df1-192afcf39a27" class="l-body-outset" style="height:500px; width:800px;"></div>
+    <d-figure class="l-body-outset">
+      <div id="4b284f59-68f8-4606-9df1-192afcf39a27" style="height:500px; width:800px;"></div>
+    </d-figure>
 
 
     <p>
@@ -169,7 +171,9 @@
       most papers across all conferences which were not linkable were either rejected or withdrawn.
     </p>
 
-    <div id="92dddb17-1483-4db3-afc8-0e627a1d8080" class="l-body-outset" style="height: 500px; width: 800px" ></div>
+    <d-figure class="l-body-outset">
+      <div id="92dddb17-1483-4db3-afc8-0e627a1d8080" style="height: 500px; width: 800px" ></div>
+    </d-figure>
 
       <p>
         The reward for doing this work is a set of 38,262 linked records between OpenReview submissions and a dynamic academic graph, as well as 462,995 structured comments from reviewers.
@@ -230,12 +234,13 @@
         'signature': 'ICLR.cc/2017/conference/paper4/AnonReviewer1',
         'content': {
           'title': 'hyperparameter optimization and momentum vs CPN',
-          'question': "The hyperparameters of gradient descent seem to be chosen once and fixed. 
-                       Would optimizing the gradient descent hyperparameters lead to equivalent 
-                       performance as the CPN method?\n\nFollowing up on another reviewer's 
-                       question: CPN seems closely related to momentum. Can you provide a clear 
-                       example to show how CPN is qualitatively distinct from momentum? (I believe
-                       it is, but this could be clarified further in the paper)"
+          'question': "
+              The hyperparameters of gradient descent seem to be chosen once and fixed. 
+              Would optimizing the gradient descent hyperparameters lead to equivalent 
+              performance as the CPN method?\n\nFollowing up on another reviewer's 
+              question: CPN seems closely related to momentum. Can you provide a clear 
+              example to show how CPN is qualitatively distinct from momentum? (I believe
+              it is, but this could be clarified further in the paper)"
           },
         'reply_to_id': 'B1jnyXXJx',
         'is_review': False,
@@ -246,17 +251,27 @@
       </d-code>
       <div style="text-align: center;">
         <i style="font-size: 12px;">
-          An example record from the dataset.
+          An example comment from the dataset.
         </i>
       </div>
       </div>
-
-
-
     </p>
 
-    <div id="98482921-8bd7-431e-bab8-521dcde1ff79" class="l-screen-inset" style="height: 1600px; width: 1200px; margin: 0 auto" ></div>
 
+    <h2>So - are we any good at reviewing?</h2>
+
+    <p>
+      Now we have OpenReview submissions to these conferences aligned with a academic graph, we can compare
+      citation counts to review scores - do accepted papers correlate with more citations? Overall, yes! In general
+      across conferences, accepted papers have a higher citation count than rejected papers. However, this bad news is that
+      it does look like we are getting worse at reviewing over time - ICLR 2024/5 have a larger number of rejected papers with
+      a substantial number of citations. <d-footnote> Of course, papers can be influential for many reasons, and some of these
+        reasons are not related to scientific novelty. So this correlation is not a perfect proxy for review quality.</d-footnote>
+    </p>
+
+    <d-figure style="grid-column: screen;">
+        <div id="98482921-8bd7-431e-bab8-521dcde1ff79" style="height: 1600px; width: 1200px; margin: 0 auto" ></div>
+    </d-figure>
 
   <h2>🏆 Best Rejected Papers 🏆</h2>
   <p>Below are the most highly cited papers that were initially rejected from these conferences, organized by venue:</p>
@@ -288,6 +303,7 @@
   </div>
 
 </d-article>
+
 
 <d-appendix>
   <d-bibliography>
