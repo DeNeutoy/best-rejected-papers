@@ -68,7 +68,7 @@
   <p>
     Peer review is the cornerstone of scientific publishing, yet its effectiveness remains a subject of ongoing debate,
     particularly as conference submission numbers continue to grow.
-    This blog post introduces a dataset derrived from <a href="https://openreview.net/" target="_blank">OpenReview</a>, 
+    This blog post introduces the Structured, Normalized OpenReview dataset (SNOR v1), a dataset derrived from <a href="https://openreview.net/" target="_blank">OpenReview</a>, 
     a platform that provides unprecedented transparency into the peer review process for two of the largest Machine
     Learning conferences. By examining rejected papers from top machine learning conferences but went on to achieve high 
     citation counts, we can gain insights into the challenges and limitations of academic peer review.
@@ -125,20 +125,38 @@
 
   </p>
 
+
+  <p>  
+    When papers are submitted to a conference on OpenReview, they are anonymized for the duration of the review process.
+    Multiple reviews from official reviewers, Area Chairs and interested
+    members of the public are published alongside the paper. These reviews are also anonymized, and paper authors are not able to see reviewer identities. Official reviews
+    include structured metadata about the review (in particlar, a numeric score and confidence rating).
+  </p>
+  <img src="review.png" alt="Review" style="width: 100%; height: auto;">
+  <div class="caption">
+      An example review from ICLR 2025. Papers are reviewed by multiple reviewers, and the review scores and confidence ratings are published alongside the paper.
+  </div>
+
+
+  <p>
+    All of this data is super interesting, but it is not in a very usable format - ideally we need to link paper submissions to papers which have made it out into the real world,
+    so we can see how reviews, scores and acceptance decisions correlate with citations.
+  </p>
+
   <h2>Paper Matching Success Rate</h2>
 
   <p>
-    To link OpenReview papers to their Semantic Scholar papers, we used the <a href="https://api.semanticscholar.org/api-docs/graph" target="_blank">Semantic Scholar Graph API</a>.
-    As a first step, I just used exact title matching to link papers, which is reasonably effective. 
+    OpenReview papers are linked to their Semantic Scholar papers using the <a href="https://api.semanticscholar.org/api-docs/graph" target="_blank">Semantic Scholar Graph API</a>.
+    As a first step, papers are linked using exact title matching, which is reasonably effective - covering about 80% of papers.
     The largest source of errors when using this approach came from papers with LaTeX in the title, 
     as well as as papers which changed their title from a pre-print version which was already publicly available.
   </p>
 
   <p>
-    The following chart shows the success rate of this approach over time.
+    The following chart shows the success rate of this approach per conference.
   </p>
 
-    <d-figure class="l-body-outset">
+    <d-figure style="grid-column: screen; margin: 0 auto;">
       <div id="4b284f59-68f8-4606-9df1-192afcf39a27" style="height:500px; width:800px;"></div>
     </d-figure>
 
@@ -152,7 +170,7 @@
           Levenshtein distance between titles
         </li>
         <li>
-          Average Levenshtein distance between authors, ordered
+          Average Levenshtein distance between authors, ordered paper author order
         </li>
         <li>
           Discarding results where the highest ranking result based on the above criteria had a title similarity of less than 0.7
@@ -160,7 +178,7 @@
       </ul>
 
       <p>
-      This catches quite a few of the errors (particularly related to syntactical differences in the title). For some papers submitted
+      This catches quite a few of the errors (particularly related to syntactic differences in the title). For some papers submitted
       to OpenReview, there actually is no publicly available paper, typically because these papers are either improved for another subsequent
       conference, or are not high enough quality to be published.
 </p>
@@ -171,12 +189,12 @@
       most papers across all conferences which were not linkable were either rejected or withdrawn.
     </p>
 
-    <d-figure class="l-body-outset">
+    <d-figure style="grid-column: screen; margin: 0 auto;">
       <div id="92dddb17-1483-4db3-afc8-0e627a1d8080" style="height: 500px; width: 800px" ></div>
     </d-figure>
 
       <p>
-        The reward for doing this work is a set of 38,262 linked records between OpenReview submissions and a dynamic academic graph, as well as 462,995 structured comments from reviewers.
+        The reward for doing this work is SNOR v1, a dataset of 38,262 linked records between OpenReview submissions and a dynamic academic graph, as well as 462,995 structured comments from reviewers.
         <a href="https://api.semanticscholar.org/api-docs/graph#tag/Paper-Data/operation/get_graph_get_paper" target="_blank">Semantic Scholar's paper information</a> 
         is quite rich, and includes information about authors, citations, and a variety of other metadata. By default, I added
         citation counts, venue information, Specter embeddings <d-cite key="Singh2022SciRepEvalAM"></d-cite> and author ids to the dataset - but other information is easily retrievable using the <d-code language="python">semantic_scholar_id</d-code>.
@@ -249,10 +267,8 @@
         'confidence': None,
         'numeric_confidence': None}
       </d-code>
-      <div style="text-align: center;">
-        <i style="font-size: 12px;">
+      <div class="caption">
           An example comment from the dataset.
-        </i>
       </div>
       </div>
     </p>
@@ -274,7 +290,10 @@
     </d-figure>
 
   <h2>🏆 Best Rejected Papers 🏆</h2>
-  <p>Below are the most highly cited papers that were initially rejected from these conferences, organized by venue:</p>
+  <p>
+    One of the most interesting things about this dataset is the ability to look at the most highly cited papers that were initially rejected from these conferences. 
+    Some extremely influential papers were initially rejected from these conferences - for example, ROBERTA <d-cite key="Liu2019RoBERTaAR"></d-cite> was rejected from ICLR 2020, and has subsequently been cited over 20,000 times.
+  </p>
   
   <p>
   <div id="best-rejected-visualization" style="margin-top: 20px; margin-bottom: 20px;">
@@ -290,31 +309,60 @@
   </p>
 
 
-
-
   <h2> High Impact, "Unlucky" First Authors </h2>
 
   <p>
-    The following shows the most productive first authors whose papers were initially rejected from these conferences. 
+    By linking papers to an academic graph, we can also link paper authors to their academic graph profiles. This allows
+    us to look at interesting patterns, like the most "unlucky" first authors. 
+    The following interactive visualization shows the most productive first authors whose papers were rejected from these conferences, but were highly cited on average.
     Each author is ranked by their average citations per year, with expandable details showing their rejected papers and citation counts.
   </p>
 
   <div id="high-impact-first-author-rejected-visualization" style="margin-top: 20px; margin-bottom: 20px;">
   </div>
 
+
+
+  <h2>Conclusion & Future Work</h2>
+  <p>
+    SNOR v1 is not the first attempt to use peer review data to better understand the scientific publishing process. The AMPERE dataset<d-cite key="hua-etal-2019-argument"></d-cite>
+    approaches peer reviews through the lens of argument mining, focusing on the identification and classification of argumentative propositions. 
+    Their annotated dataset of 400 reviews reveals patterns in how reviewers structure their feedback, offering insights into proposition types such as evaluation, requests, and factual statements.
+    Similarly, COMPARE <d-cite key="9651878"></d-cite> designed a taxonomy and dataset of comparison discussions in peer reviews.
+   </p> 
+    <p>
+    PeerRead <d-cite key="kang-etal-2018-dataset"></d-cite> was one of the first larger-scale public datasets of peer reviews, comprising  14.7K paper drafts and 10.7K reviews paired with paper drafts and acceptance decisions.
+    CiteTracked <d-cite key="Plank2019CiteTrackedAL"></d-cite> adds a longitudinal dimension by linking peer reviews to citation statistics across six years of machine learning publications.
+     
+    </p>
+
+    <p>
+      SNOR v1 differs from these resources in a several ways. Firstly, it is substantially larger, comprising 462,995 comments on 38,262 papers.
+      Secondly, SNOR v1 provides structured comment metadata including replies, allowing for more complex analyses involving review discussions, rebuttals and other interactions.
+      Finally, SNOR v1 normalizes review metadata to provide consistent numeric scores and confidence ratings, allowing for more accurate comparisons between reviews. Links to
+      an academic graph which not only include paper identifiers but also normalized author and venue identifiers allow a wider range of analyses than previous datasets.
+    </p>
+
+  <p>
+    This dataset is a first step towards a more comprehensive understanding of the peer review process.
+    I hope it will be useful to others, and I welcome any feedback or suggestions for how to improve it. There are several flaws currently - in particular,
+    this is a static snapshot of a fixed set of conferences at a single point in time. As papers are updated and cited, this dataset will need to be updated.
+    Additionally, as more conferences adopt OpenReview, this dataset will need to be updated to include those conferences. 
+    For example, <a href="https://openreview.net/group?id=ICML.cc/2025/Conference" target="_blank">ICML 2025 followed the
+    same fully open review process this year</a>, and this dataset does not currently include those papers.
+  </p>
+
+  <p>
+    Despite these limitations, SNOR v1's features should allow a wide range of analyses and uses across both science of science, as well as a textual resource.
+    Given the recent interest in Large Language Models for scientific authorship and reviewing, SNOR's structured comment metadata could be an invaluable dataset
+    for reinforcement learning from human feedback - I'm excited to see what others will build with it!
+  </p>
 </d-article>
 
 
 <d-appendix>
   <d-bibliography>
     <script type="text/bibtex">
-      @article{gregor2015draw,
-        title={DRAW: A recurrent neural network for image generation},
-        author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
-        journal={arXivreprint arXiv:1502.04623},
-        year={2015},
-        url={https://arxiv.org/pdf/1502.04623.pdf}
-      }
       @inproceedings{Soergel2013OpenSA,
         title={Open Scholarship and Peer Review: a Time for Experimentation},
         author={David Soergel and Adam Saunders and Andrew McCallum},
@@ -328,6 +376,73 @@
         year={2022},
         url={https://api.semanticscholar.org/CorpusID:254018137}
       }
+      @inproceedings{Plank2019CiteTrackedAL,
+        title={CiteTracked: A Longitudinal Dataset of Peer Reviews and Citations},
+        author={Barbara Plank and Reinard van Dalen},
+        booktitle={BIRNDL@SIGIR},
+        year={2019},
+        url={https://api.semanticscholar.org/CorpusID:198489688}
+      }
+      @inproceedings{hua-etal-2019-argument,
+          title = "Argument Mining for Understanding Peer Reviews",
+          author = "Hua, Xinyu  and
+            Nikolov, Mitko  and
+            Badugu, Nikhil  and
+            Wang, Lu",
+          editor = "Burstein, Jill  and
+            Doran, Christy  and
+            Solorio, Thamar",
+          booktitle = "Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+          month = jun,
+          year = "2019",
+          address = "Minneapolis, Minnesota",
+          publisher = "Association for Computational Linguistics",
+          url = "https://aclanthology.org/N19-1219/",
+          doi = "10.18653/v1/N19-1219",
+          pages = "2131--2137",
+          abstract = "Peer-review plays a critical role in the scientific writing and publication ecosystem. To assess the efficiency and efficacy of the reviewing process, one essential element is to understand and evaluate the reviews themselves. In this work, we study the content and structure of peer reviews under the argument mining framework, through automatically detecting (1) the argumentative propositions put forward by reviewers, and (2) their types (e.g., evaluating the work or making suggestions for improvement). We first collect 14.2K reviews from major machine learning and natural language processing venues. 400 reviews are annotated with 10,386 propositions and corresponding types of Evaluation, Request, Fact, Reference, or Quote. We then train state-of-the-art proposition segmentation and classification models on the data to evaluate their utilities and identify new challenges for this new domain, motivating future directions for argument mining. Further experiments show that proposition usage varies across venues in amount, type, and topic."
+      }
+      @inproceedings{kang-etal-2018-dataset,
+        title = "A Dataset of Peer Reviews ({P}eer{R}ead): Collection, Insights and {NLP} Applications",
+        author = "Kang, Dongyeop  and
+          Ammar, Waleed  and
+          Dalvi, Bhavana  and
+          van Zuylen, Madeleine  and
+          Kohlmeier, Sebastian  and
+          Hovy, Eduard  and
+          Schwartz, Roy",
+        editor = "Walker, Marilyn  and
+          Ji, Heng  and
+          Stent, Amanda",
+        booktitle = "Proceedings of the 2018 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long Papers)",
+        month = jun,
+        year = "2018",
+        address = "New Orleans, Louisiana",
+        publisher = "Association for Computational Linguistics",
+        url = "https://aclanthology.org/N18-1149/",
+        doi = "10.18653/v1/N18-1149",
+        pages = "1647--1661",
+        abstract = "Peer reviewing is a central component in the scientific publishing process. We present the first public dataset of scientific peer reviews available for research purposes (PeerRead v1),1 providing an opportunity to study this important artifact. The dataset consists of 14.7K paper drafts and the corresponding accept/reject decisions in top-tier venues including ACL, NIPS and ICLR. The dataset also includes 10.7K textual peer reviews written by experts for a subset of the papers. We describe the data collection process and report interesting observed phenomena in the peer reviews. We also propose two novel NLP tasks based on this dataset and provide simple baseline models. In the first task, we show that simple models can predict whether a paper is accepted with up to 21{\%} error reduction compared to the majority baseline. In the second task, we predict the numerical scores of review aspects and show that simple models can outperform the mean baseline for aspects with high variance such as `originality' and `impact'."
+    }
+    @INPROCEEDINGS{9651878,
+      author={Singh, Shruti and Singh, Mayank and Goyal, Pawan},
+      booktitle={2021 ACM/IEEE Joint Conference on Digital Libraries (JCDL)}, 
+      title={COMPARE: A Taxonomy and Dataset of Comparison Discussions in Peer Reviews}, 
+      year={2021},
+      volume={},
+      number={},
+      pages={238-241},
+      keywords={Deep learning;Annotations;Taxonomy;Bibliometrics;Libraries;Scientometrics;Peer Review;Taxonomy},
+      doi={10.1109/JCDL52503.2021.00068}}
+
+      @article{Liu2019RoBERTaAR,
+        title={RoBERTa: A Robustly Optimized BERT Pretraining Approach},
+        author={Yinhan Liu and Myle Ott and Naman Goyal and Jingfei Du and Mandar Joshi and Danqi Chen and Omer Levy and Mike Lewis and Luke Zettlemoyer and Veselin Stoyanov},
+        journal={ArXiv},
+        year={2019},
+        volume={abs/1907.11692},
+        url={https://api.semanticscholar.org/CorpusID:198953378}
+      }      
     </script>
   </d-bibliography>
   <style>
