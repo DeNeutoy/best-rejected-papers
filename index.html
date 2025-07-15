@@ -70,8 +70,9 @@
     particularly as conference submission numbers continue to grow.
     This blog post introduces the Structured, Normalized OpenReview dataset (SNOR v1), a dataset derrived from <a href="https://openreview.net/" target="_blank">OpenReview</a>, 
     a platform that provides unprecedented transparency into the peer review process for two of the largest Machine
-    Learning conferences. By examining rejected papers from top machine learning conferences but went on to achieve high 
-    citation counts, we can gain insights into the challenges and limitations of academic peer review.
+    Learning conferences. By examining rejected papers from top machine learning conferences which ended up being highly
+    cited, we can gain insights into the challenges and limitations of academic peer review.
+
   </p>
   <p>
     The dataset is available under the <a href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank">CC-BY 4.0 license</a> 
@@ -118,13 +119,17 @@
 
   <p>
     Neurips only transitioned to OpenReview in 2021, and for 2018, OpenReview was used for ICLR reviewing but the decisions and reviews were not published.
+    <d-footnote>
+      My interest in peer review stems from a personal experience at ICLR 2018: when I was working at the Allen Institute for AI, our paper 
+      <a href="https://arxiv.org/abs/1802.05365" target="_blank">Deep Contextualized Word Representations</a> was comprehensively rejected from ICLR 2018.
+      We resubmitted it practically unchanged to EMNLP 2018, where it won the Best Paper Award. Whilst I understand that peer review is not zero variance,
+      I was surprised that a paper which was so well received at EMNLP 2018 could be rejected from ICLR 2018, despite it's fundamental contribution being that of <i>learning representations</i>.
+    </d-footnote>
     There is also one important difference between the two conferences - all papers submitted to ICLR are public by default, but papers rejected from Neurips are  
     only made public with the author's permission. This introduces a clear bias in the data (which can be seen in the number of rejected papers below).
   </p>
 
-
   </p>
-
 
   <p>  
     When papers are submitted to a conference on OpenReview, they are anonymized for the duration of the review process.
@@ -282,7 +287,8 @@
 
     <p>
       Now we have OpenReview submissions to these conferences aligned with a academic graph, we can compare
-      citation counts to review scores - do accepted papers correlate with more citations? Overall, yes! In general
+      citation counts to review scores - do accepted papers correlate with more citations? 
+      <d-footnote>This is something that I have looked at before, about 5 years ago. Previous analysis can be found <a href="https://deneutoy.github.io/iclr/" target="_blank">here</a></d-footnote> Overall, yes! In general
       across conferences, accepted papers have a higher citation count than rejected papers. However, this bad news is that
       it does look like we are getting worse at reviewing over time - ICLR 2024/5 have a larger number of rejected papers with
       a substantial number of citations. <d-footnote> Of course, papers can be influential for many reasons, and some of these
@@ -469,14 +475,14 @@
   </style>
 
   <h3 id="citation">Citation</h3>
-  <p>For attribution in academic contexts, please cite this work as</p>
+  <p>For attribution in academic contexts, please cite this work as:</p>
   <pre
-      class="citation short">Neumann, M. (2025). Structured and Linked OpenReview Reviews and Comments (Version v1) [Data set]. Zenodo.</pre>
+      class="citation short">Neumann, M. (2025). SNOR v1: Structured and Linked OpenReview Reviews and Comments [Data set]. Zenodo.</pre>
   <p>BibTeX citation</p>
   <pre class="citation long">
     @dataset{neumann_2025_15866613,
       author       = {Neumann, Mark},
-      title        = {Structured and Linked OpenReview Reviews and Comments},
+      title        = {SNOR v1: Structured and Linked OpenReview Reviews and Comments},
       month        = jul,
       year         = 2025,
       publisher    = {Zenodo},
