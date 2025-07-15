@@ -110,7 +110,7 @@
     <a href="https://openreview.net/group?id=ICLR.cc/2013/Conference" target="_blank">The International Conference on Learning Representations (ICLR)</a> and 
     <a href="https://openreview.net/group?id=NeurIPS.cc/2017/Conference" target="_blank">Neural Information Processing Systems (NeurIPS)</a>.
 
-  In particular, we will focus on the following conference years:
+  In particular, SNOR v1 includes the following conference years:
   <ul>
     <li> ICLR: 2017, 2019-2025
     <li> Neurips: 2021-2025
@@ -139,7 +139,7 @@
 
 
   <p>
-    All of this data is super interesting, but it is not in a very usable format - ideally we need to link paper submissions to papers which have made it out into the real world,
+    All of this data is super interesting, but it is not in a very usable format - ideally paper submissions should be linked to papers which have made it out into the real world,
     so we can see how reviews, scores and acceptance decisions correlate with citations.
   </p>
 
@@ -236,12 +236,12 @@
     </div>
 
     <p>
-    In addition to the paper information, we also have a set of 462,995 structured comments from reviewers. these
+    In addition to the paper information, SNOR v1 also includes a set of 462,995 structured comments from reviewers. these
     comments include references to papers, anonymous author signatures, and arbitrary content (typically in the
     form of title:content blocks which render in OpenReview). Reviews are distingushed from other comments by the
-    'is_review' field, which is set to True for reviews. These comments will also have a numeric rating and confidence score.
-    Finally, all comments have a reply_to_id field, which links to the id of the paper that the comment is replying to. Review comments
-    will have a reply_to_id that links to the id of the paper they are reviewing.  <d-footnote>There are a small number of orphaned comments which do not have a reply_to_id. From inspection, these tend to be special cases where an AC has manually commented on a paper conversation.</d-footnote>
+    <d-code language="python">is_review</d-code> field, which is set to True for reviews. These comments will also have a numeric rating and confidence score.
+    Finally, all comments have a <d-code language="python">reply_to_id</d-code> field, which links to the id of the paper that the comment is replying to. Review comments
+    will have a <d-code language="python">reply_to_id</d-code> that links to the id of the paper they are reviewing.  <d-footnote>There are a small number of orphaned comments which do not have a <d-code language="python">reply_to_id</d-code>. From inspection, these tend to be special cases where an AC has manually commented on a paper conversation.</d-footnote>
     </p>
 
     <div class="l-body-outset">
@@ -272,6 +272,10 @@
       </div>
       </div>
     </p>
+
+
+    Comments which are marked as official reviews also have rating, confidence, numeric rating and numeric confidence fields. These contain the raw and parsed review scores and confidence raitings,
+    normalized to a 0-10 scale. Some conferences use different review scales, so this normalization is important for consistent comparisons.
 
 
     <h2>So - are we any good at reviewing?</h2>
@@ -312,7 +316,7 @@
   <h2> High Impact, "Unlucky" First Authors </h2>
 
   <p>
-    By linking papers to an academic graph, we can also link paper authors to their academic graph profiles. This allows
+    Linking papers to an academic graph makes it possible to link paper authors to their academic graph profiles. This allows
     us to look at interesting patterns, like the most "unlucky" first authors. 
     The following interactive visualization shows the most productive first authors whose papers were rejected from these conferences, but were highly cited on average.
     Each author is ranked by their average citations per year, with expandable details showing their rejected papers and citation counts.
@@ -356,7 +360,7 @@
   <p>
     Despite these limitations, SNOR v1's features should allow a wide range of analyses and uses across both science of science, as well as a textual resource.
     Given the recent interest in Large Language Models for scientific authorship and reviewing, SNOR's structured comment metadata could be an invaluable dataset
-    for reinforcement learning from human feedback - I'm excited to see what others will build with it!
+    for reinforcement learning from human feedback or other forms of post-training - I'm excited to see what others will build with it!
   </p>
 </d-article>
 
